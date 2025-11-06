@@ -1,0 +1,51 @@
+package com.harun.series.Serie.models;
+
+import com.harun.series.Serie.enums.Rating;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "series")
+public class Series {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false,length = 200)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Rating rating;
+
+    public Series() {
+    }
+
+    public Series(String name, Rating rating) {
+        this.name = name;
+        this.rating = rating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+}
