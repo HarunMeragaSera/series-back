@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface SeriesService{
     List<Series> findAll();
-    Optional<Series> findById();
+    Series findById(Long id);
     Series save(SeriesDto series);
     Series update(Long id, Series series);
     void deleteById(Long id);

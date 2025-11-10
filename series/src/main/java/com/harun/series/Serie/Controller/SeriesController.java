@@ -1,6 +1,7 @@
 package com.harun.series.Serie.Controller;
 
 import com.harun.series.Exceptions.SeriesAlreadyExistsException;
+import com.harun.series.Exceptions.SeriesNotFoundException;
 import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.Service.SeriesService;
 import com.harun.series.Serie.models.Series;
@@ -29,8 +30,8 @@ public class SeriesController {
         return new ResponseEntity<>(savedSeries, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<Series> getAll (){
-        return seriesService.findAll();
+    @GetMapping("/{id}")
+    public Series findById (@PathVariable("id") Long id) throws SeriesNotFoundException {
+        return seriesService.findById(id);
     }
 }

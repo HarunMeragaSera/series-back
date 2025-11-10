@@ -1,11 +1,14 @@
 package com.harun.series.Serie.Service;
 
 import com.harun.series.Exceptions.SeriesAlreadyExistsException;
+import com.harun.series.Exceptions.SeriesNotFoundException;
 import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.Mapper.SeriesMapper;
 import com.harun.series.Serie.models.Series;
 import com.harun.series.Serie.repositories.SeriesRepository;
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +30,8 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public Optional<Series> findById() {
-        return Optional.empty();
+    public Series findById(Long id) throws SeriesNotFoundException{
+        return seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
     }
 
     @Override

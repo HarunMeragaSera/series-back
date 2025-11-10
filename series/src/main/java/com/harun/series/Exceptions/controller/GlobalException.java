@@ -2,6 +2,7 @@ package com.harun.series.Exceptions.controller;
 
 import com.harun.series.Exceptions.DTO.messageDTO;
 import com.harun.series.Exceptions.SeriesAlreadyExistsException;
+import com.harun.series.Exceptions.SeriesNotFoundException;
 import com.harun.series.Helpers.Operations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,9 @@ public class GlobalException {
         });
         return ResponseEntity.badRequest().body(new messageDTO(HttpStatus.BAD_REQUEST, Operations.trimBrackets(messages.toString())));
     }
+    @ExceptionHandler(SeriesNotFoundException.class)
+    public ResponseEntity<messageDTO> seriesNotFoundException(SeriesNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body( new messageDTO(HttpStatus.CONFLICT,ex.getMessage()));
+    }
+
 }
