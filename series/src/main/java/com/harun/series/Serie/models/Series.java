@@ -17,12 +17,16 @@ public class Series {
     @Enumerated(EnumType.STRING)
     private Rating rating;
 
+    @Column (name = "image_url", length = 500)
+    private String imageUrl;
+
     public Series() {
     }
 
-    public Series(String name, Rating rating) {
+    public Series(String name, Rating rating, String imageUrl) {
         this.name = name;
         this.rating = rating;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -47,5 +51,13 @@ public class Series {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

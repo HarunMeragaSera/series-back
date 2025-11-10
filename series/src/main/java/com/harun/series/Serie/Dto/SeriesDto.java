@@ -1,18 +1,29 @@
 package com.harun.series.Serie.Dto;
 
 import com.harun.series.Serie.enums.Rating;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class SeriesDto {
     @NotBlank(message = "Series name is mandatory")
+    @Size(max = 200,message = "Name must be at most 200 characters long")
     private String name;
     @NotNull(message = "Series rating is mandatory")
     private Rating rating;
+    @Size(max = 500,message = "Image url must be at most 500 characters long")
+    private String imageUrl;
 
     public SeriesDto(String name, Rating rating) {
         this.name = name;
         this.rating = rating;
+    }
+
+    public SeriesDto(String name, Rating rating,String imageUrl) {
+        this.name = name;
+        this.rating = rating;
+        this.imageUrl = imageUrl;
     }
 
     public SeriesDto(){}
@@ -31,5 +42,13 @@ public class SeriesDto {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

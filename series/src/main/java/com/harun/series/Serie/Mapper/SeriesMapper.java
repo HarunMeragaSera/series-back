@@ -6,6 +6,6 @@ import com.harun.series.Serie.models.Series;
 public class SeriesMapper {
 
     public static Series seriesDtoToSeries(SeriesDto dto){
-        return new Series(dto.getName(),dto.getRating());
+        return new Series(dto.getName(),dto.getRating(),dto.getImageUrl());
     }
 }
