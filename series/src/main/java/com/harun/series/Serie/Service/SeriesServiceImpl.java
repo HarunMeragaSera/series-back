@@ -6,13 +6,10 @@ import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.Mapper.SeriesMapper;
 import com.harun.series.Serie.models.Series;
 import com.harun.series.Serie.repositories.SeriesRepository;
-import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SeriesServiceImpl implements SeriesService{
@@ -44,12 +41,18 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public Series update(Long id, Series series) {
-        return null;
+    public Series update(Long id, SeriesDto seriesDto) {
+        if(existsByName(seriesDto.getName())){
+            throw new SeriesAlreadyExistsException(seriesDto.getName());
+        }
+        Series serieFounded = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
+        return seriesRepository.save(SeriesMapper.dtoAndSeriesToSeries(seriesDto,serieFounded));
     }
 
     @Override
     public void deleteById(Long id) {
+        Series serieFounded = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
+        seriesRepository.deleteById(id);
 
     }
 

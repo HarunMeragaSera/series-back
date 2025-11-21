@@ -34,4 +34,19 @@ public class SeriesController {
     public Series findById (@PathVariable("id") Long id) throws SeriesNotFoundException {
         return seriesService.findById(id);
     }
+
+    @GetMapping()
+    public List<Series> findAll(){
+        return seriesService.findAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id){
+        seriesService.deleteById(id);
+    }
+
+    @PostMapping("/{id}")
+    public Series update(@PathVariable("id") Long id,@RequestBody @Validated SeriesDto series){
+        return seriesService.update(id,series);
+    }
 }

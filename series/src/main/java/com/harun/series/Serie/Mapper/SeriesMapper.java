@@ -8,4 +8,10 @@ public class SeriesMapper {
     public static Series seriesDtoToSeries(SeriesDto dto){
         return new Series(dto.getName(),dto.getRating(),dto.getImageUrl());
     }
+    public static Series dtoAndSeriesToSeries(SeriesDto dto, Series series){
+        series.setName(dto.getName());
+        series.setRating(dto.getRating());
+        series.setImageUrl(dto.getImageUrl());
+        return series;
+    }
 }
