@@ -20,13 +20,18 @@ public class Series {
     @Column (name = "image_url", length = 500)
     private String imageUrl;
 
+    @Column(name = "year_watch")
+    private Integer yearWatch;
+
     public Series() {
     }
 
-    public Series(String name, Rating rating, String imageUrl) {
+    public Series(String name, Rating rating, String imageUrl, Integer yearWatch) {
+        this.id = id;
         this.name = name;
         this.rating = rating;
         this.imageUrl = imageUrl;
+        this.yearWatch = yearWatch;
     }
 
     public Long getId() {
@@ -59,5 +64,13 @@ public class Series {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Integer getYearWatch() {
+        return yearWatch;
+    }
+
+    public void setYearWatch(Integer yearWatch) {
+        this.yearWatch = yearWatch;
     }
 }

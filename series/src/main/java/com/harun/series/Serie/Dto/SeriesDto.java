@@ -14,16 +14,20 @@ public class SeriesDto {
     private Rating rating;
     @Size(max = 500,message = "Image url must be at most 500 characters long")
     private String imageUrl;
+    @NotNull(message = "Year is mandatory")
+    private Integer yearWatch;
 
-    public SeriesDto(String name, Rating rating) {
+    public SeriesDto(String name, Rating rating, Integer yearWatch) {
         this.name = name;
         this.rating = rating;
+        this.yearWatch = yearWatch;
     }
 
-    public SeriesDto(String name, Rating rating,String imageUrl) {
+    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch) {
         this.name = name;
         this.rating = rating;
         this.imageUrl = imageUrl;
+        this.yearWatch = yearWatch;
     }
 
     public SeriesDto(){}
@@ -50,5 +54,13 @@ public class SeriesDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Integer getYearWatch() {
+        return yearWatch;
+    }
+
+    public void setYearWatch(Integer yearWatch) {
+        this.yearWatch = yearWatch;
     }
 }
