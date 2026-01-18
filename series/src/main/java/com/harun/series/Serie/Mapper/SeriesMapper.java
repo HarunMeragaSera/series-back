@@ -14,4 +14,13 @@ public class SeriesMapper {
         series.setImageUrl(dto.getImageUrl());
         return series;
     }
+
+    public static SeriesDto toDto(Series series) {
+        return new SeriesDto(
+            series.getName(),
+            series.getRating(),
+            series.getImageUrl(),
+            series.getYearWatch(),
+            series.getPublicId());
+    }
 }

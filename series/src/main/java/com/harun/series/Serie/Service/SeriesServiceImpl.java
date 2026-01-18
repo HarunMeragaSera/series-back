@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class SeriesServiceImpl implements SeriesService{
 
@@ -22,31 +24,35 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public List<Series> findAll() {
-        return (List<Series>) this.seriesRepository.findAll();
+    public List<SeriesDto> findAll() {
+        return seriesRepository.findAll()
+                .stream()
+                .map(SeriesMapper::toDto)
+                .toList();
     }
 
     @Override
-    public Series findById(Long id) throws SeriesNotFoundException{
-        return seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
+    public SeriesDto findById(Long id) throws SeriesNotFoundException{
+        Series series = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
+        return SeriesMapper.toDto(series);
     }
 
     @Override
-    public Series save(SeriesDto seriesDto) throws SeriesAlreadyExistsException {
+    public SeriesDto save(SeriesDto seriesDto) throws SeriesAlreadyExistsException {
         if(existsByName(seriesDto.getName())){
             throw new SeriesAlreadyExistsException(seriesDto.getName());
         }
 
-        return seriesRepository.save(SeriesMapper.seriesDtoToSeries(seriesDto));
+        return SeriesMapper.toDto(seriesRepository.save(SeriesMapper.seriesDtoToSeries(seriesDto)));
     }
 
     @Override
-    public Series update(Long id, SeriesDto seriesDto) {
+    public SeriesDto update(Long id, SeriesDto seriesDto) {
         if(existsByName(seriesDto.getName())){
             throw new SeriesAlreadyExistsException(seriesDto.getName());
         }
         Series serieFounded = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
-        return seriesRepository.save(SeriesMapper.dtoAndSeriesToSeries(seriesDto,serieFounded));
+        return SeriesMapper.toDto(seriesRepository.save(SeriesMapper.dtoAndSeriesToSeries(seriesDto,serieFounded)));
     }
 
     @Override
@@ -54,6 +60,11 @@ public class SeriesServiceImpl implements SeriesService{
         Series serieFounded = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
         seriesRepository.deleteById(id);
 
+    }
+    @Override
+    public SeriesDto getByPublicId(String publicId) {
+        Series series = seriesRepository.findByPublicId(publicId).orElseThrow(() -> new SeriesNotFoundException(publicId));
+        return SeriesMapper.toDto(series);
     }
 
     public boolean existsByName(String name) {

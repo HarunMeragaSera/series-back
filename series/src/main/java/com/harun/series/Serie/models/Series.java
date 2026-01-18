@@ -3,6 +3,8 @@ package com.harun.series.Serie.models;
 import com.harun.series.Serie.enums.Rating;
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "series")
 public class Series {
@@ -10,6 +12,9 @@ public class Series {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true, updatable = false)
+    private String publicId;
 
     @Column(nullable = false,length = 200)
     private String name;
@@ -22,6 +27,13 @@ public class Series {
 
     @Column(name = "year_watch")
     private Integer yearWatch;
+
+    @PrePersist
+    public void generatePublicId() {
+        if (publicId == null) {
+            publicId = UUID.randomUUID().toString();
+        }
+    }
 
     public Series() {
     }
@@ -72,5 +84,13 @@ public class Series {
 
     public void setYearWatch(Integer yearWatch) {
         this.yearWatch = yearWatch;
+    }
+
+    public String getPublicId() {
+        return publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
     }
 }

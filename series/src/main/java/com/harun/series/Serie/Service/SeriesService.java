@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SeriesService{
-    List<Series> findAll();
-    Series findById(Long id);
-    Series save(SeriesDto series);
-    Series update(Long id, SeriesDto seriesDto);
+    List<SeriesDto> findAll();
+    SeriesDto findById(Long id);
+    SeriesDto save(SeriesDto series);
+    SeriesDto update(Long id, SeriesDto seriesDto);
+    SeriesDto getByPublicId(String publicId);
     void deleteById(Long id);
 }

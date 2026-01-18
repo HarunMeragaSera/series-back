@@ -26,17 +26,22 @@ public class SeriesController {
 
     @PostMapping
     public ResponseEntity<?> createSeries(@RequestBody @Validated SeriesDto series) throws SeriesAlreadyExistsException {
-        Series savedSeries = seriesService.save(series);
+        SeriesDto savedSeries = seriesService.save(series);
         return new ResponseEntity<>(savedSeries, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public Series findById (@PathVariable("id") Long id) throws SeriesNotFoundException {
+    public SeriesDto findById (@PathVariable("id") Long id) throws SeriesNotFoundException {
         return seriesService.findById(id);
     }
 
+    @GetMapping("/{publicId}")
+    public SeriesDto getByPublicId(@PathVariable String publicId) {
+        return seriesService.getByPublicId(publicId);
+    }
+
     @GetMapping()
-    public List<Series> findAll(){
+    public List<SeriesDto> findAll(){
         return seriesService.findAll();
     }
 
@@ -46,7 +51,7 @@ public class SeriesController {
     }
 
     @PostMapping("/{id}")
-    public Series update(@PathVariable("id") Long id,@RequestBody @Validated SeriesDto series){
+    public SeriesDto update(@PathVariable("id") Long id,@RequestBody @Validated SeriesDto series){
         return seriesService.update(id,series);
     }
 }

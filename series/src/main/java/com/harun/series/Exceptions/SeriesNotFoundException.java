@@ -5,4 +5,9 @@ public class SeriesNotFoundException extends RuntimeException {
 
         super("Series with ID: "+id+" not found");
     }
+
+    public SeriesNotFoundException(String id) {
+
+        super("Series with Public ID: "+id+" not found");
+    }
 }
