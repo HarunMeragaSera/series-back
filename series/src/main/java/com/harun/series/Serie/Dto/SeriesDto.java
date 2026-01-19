@@ -16,6 +16,7 @@ public class SeriesDto {
     private String imageUrl;
     @NotNull(message = "Year is mandatory")
     private Integer yearWatch;
+    private String description;
     private String publicId;
 
     public SeriesDto(String name, Rating rating, Integer yearWatch) {
@@ -25,12 +26,13 @@ public class SeriesDto {
 
     }
 
-    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch,String publicId) {
+    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch,String publicId,String description) {
         this.name = name;
         this.rating = rating;
         this.imageUrl = imageUrl;
         this.yearWatch = yearWatch;
         this.publicId = publicId;
+        this.description = description;
     }
 
     public SeriesDto(){}
@@ -73,5 +75,13 @@ public class SeriesDto {
 
     public void setPublicId(String publicId) {
         this.publicId = publicId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

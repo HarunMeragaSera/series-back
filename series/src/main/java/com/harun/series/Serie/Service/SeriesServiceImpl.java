@@ -32,12 +32,6 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public SeriesDto findById(Long id) throws SeriesNotFoundException{
-        Series series = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
-        return SeriesMapper.toDto(series);
-    }
-
-    @Override
     public SeriesDto save(SeriesDto seriesDto) throws SeriesAlreadyExistsException {
         if(existsByName(seriesDto.getName())){
             throw new SeriesAlreadyExistsException(seriesDto.getName());

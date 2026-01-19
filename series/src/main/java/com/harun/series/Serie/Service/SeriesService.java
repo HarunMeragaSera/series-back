@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface SeriesService{
     List<SeriesDto> findAll();
-    SeriesDto findById(Long id);
     SeriesDto save(SeriesDto series);
     SeriesDto update(Long id, SeriesDto seriesDto);
     SeriesDto getByPublicId(String publicId);

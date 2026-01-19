@@ -6,7 +6,7 @@ import com.harun.series.Serie.models.Series;
 public class SeriesMapper {
 
     public static Series seriesDtoToSeries(SeriesDto dto){
-        return new Series(dto.getName(),dto.getRating(),dto.getImageUrl(),dto.getYearWatch());
+        return new Series(dto.getName(),dto.getRating(),dto.getImageUrl(),dto.getYearWatch(),dto.getDescription());
     }
     public static Series dtoAndSeriesToSeries(SeriesDto dto, Series series){
         series.setName(dto.getName());
@@ -21,6 +21,7 @@ public class SeriesMapper {
             series.getRating(),
             series.getImageUrl(),
             series.getYearWatch(),
-            series.getPublicId());
+            series.getPublicId(),
+            series.getDescription());
     }
 }

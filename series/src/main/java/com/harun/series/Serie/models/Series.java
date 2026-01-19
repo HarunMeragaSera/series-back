@@ -28,6 +28,9 @@ public class Series {
     @Column(name = "year_watch")
     private Integer yearWatch;
 
+    @Column(length = 2000)
+    private String description;
+
     @PrePersist
     public void generatePublicId() {
         if (publicId == null) {
@@ -38,12 +41,13 @@ public class Series {
     public Series() {
     }
 
-    public Series(String name, Rating rating, String imageUrl, Integer yearWatch) {
+    public Series(String name, Rating rating, String imageUrl, Integer yearWatch,String description) {
         this.id = id;
         this.name = name;
         this.rating = rating;
         this.imageUrl = imageUrl;
         this.yearWatch = yearWatch;
+        this.description = description;
     }
 
     public Long getId() {
@@ -92,5 +96,13 @@ public class Series {
 
     public void setPublicId(String publicId) {
         this.publicId = publicId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

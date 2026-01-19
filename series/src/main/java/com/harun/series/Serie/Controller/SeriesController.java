@@ -30,11 +30,6 @@ public class SeriesController {
         return new ResponseEntity<>(savedSeries, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public SeriesDto findById (@PathVariable("id") Long id) throws SeriesNotFoundException {
-        return seriesService.findById(id);
-    }
-
     @GetMapping("/{publicId}")
     public SeriesDto getByPublicId(@PathVariable String publicId) {
         return seriesService.getByPublicId(publicId);
