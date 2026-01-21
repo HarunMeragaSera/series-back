@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public class SeriesDto {
     @NotBlank(message = "Series name is mandatory")
     @Size(max = 200,message = "Name must be at most 200 characters long")
@@ -18,6 +20,7 @@ public class SeriesDto {
     private Integer yearWatch;
     private String description;
     private String publicId;
+    private List<String> genres;
 
     public SeriesDto(String name, Rating rating, Integer yearWatch) {
         this.name = name;
@@ -26,13 +29,14 @@ public class SeriesDto {
 
     }
 
-    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch,String publicId,String description) {
+    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch,String publicId,String description,List<String> genres) {
         this.name = name;
         this.rating = rating;
         this.imageUrl = imageUrl;
         this.yearWatch = yearWatch;
         this.publicId = publicId;
         this.description = description;
+        this.genres = genres;
     }
 
     public SeriesDto(){}
@@ -83,5 +87,13 @@ public class SeriesDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 }

@@ -1,5 +1,6 @@
 package com.harun.series.Serie.Mapper;
 
+import com.harun.series.Genre.models.Genre;
 import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.models.Series;
 
@@ -22,6 +23,10 @@ public class SeriesMapper {
             series.getImageUrl(),
             series.getYearWatch(),
             series.getPublicId(),
-            series.getDescription());
+            series.getDescription(),
+            series.getGenres().stream()
+                        .map(Genre::getName)
+                        .toList()
+        );
     }
 }

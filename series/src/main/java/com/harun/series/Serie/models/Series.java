@@ -1,8 +1,12 @@
 package com.harun.series.Serie.models;
 
+import com.harun.series.Genre.models.Genre;
 import com.harun.series.Serie.enums.Rating;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -30,6 +34,14 @@ public class Series {
 
     @Column(length = 2000)
     private String description;
+
+    @ManyToMany
+    @JoinTable(
+            name = "series_genres",
+            joinColumns = @JoinColumn(name = "series_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres = new HashSet<>();
 
     @PrePersist
     public void generatePublicId() {
@@ -105,4 +117,7 @@ public class Series {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<Genre> getGenres() { return genres; }
+    public void setGenres(Set<Genre> genres) { this.genres = genres; }
 }

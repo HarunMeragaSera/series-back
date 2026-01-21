@@ -2,6 +2,7 @@ package com.harun.series.Serie.Service;
 
 import com.harun.series.Exceptions.SeriesAlreadyExistsException;
 import com.harun.series.Exceptions.SeriesNotFoundException;
+import com.harun.series.Genre.models.Genre;
 import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.Mapper.SeriesMapper;
 import com.harun.series.Serie.models.Series;
@@ -58,6 +59,8 @@ public class SeriesServiceImpl implements SeriesService{
     @Override
     public SeriesDto getByPublicId(String publicId) {
         Series series = seriesRepository.findByPublicId(publicId).orElseThrow(() -> new SeriesNotFoundException(publicId));
+        series.getGenres().stream()
+                .forEach( genre -> System.out.println(genre.getName()));
         return SeriesMapper.toDto(series);
     }
 
