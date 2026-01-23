@@ -1,5 +1,6 @@
 package com.harun.series.Genre.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.harun.series.Serie.models.Series;
 import jakarta.persistence.*;
 
@@ -18,6 +19,7 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genres")
+    @JsonIgnore
     private Set<Series> series = new HashSet<>();
 
     public Genre() {
