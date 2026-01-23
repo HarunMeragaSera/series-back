@@ -4,7 +4,6 @@ import com.harun.series.Genre.models.Genre;
 import com.harun.series.Serie.enums.Rating;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;

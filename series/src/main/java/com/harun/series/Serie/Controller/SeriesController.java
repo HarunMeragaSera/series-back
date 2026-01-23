@@ -2,6 +2,7 @@ package com.harun.series.Serie.Controller;
 
 import com.harun.series.Exceptions.SeriesAlreadyExistsException;
 import com.harun.series.Exceptions.SeriesNotFoundException;
+import com.harun.series.Serie.Dto.SeriesCreateDTO;
 import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.Service.SeriesService;
 import com.harun.series.Serie.models.Series;
@@ -25,7 +26,7 @@ public class SeriesController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createSeries(@RequestBody @Validated SeriesDto series) throws SeriesAlreadyExistsException {
+    public ResponseEntity<?> createSeries(@RequestBody @Validated SeriesCreateDTO series) throws SeriesAlreadyExistsException {
         SeriesDto savedSeries = seriesService.save(series);
         return new ResponseEntity<>(savedSeries, HttpStatus.CREATED);
     }

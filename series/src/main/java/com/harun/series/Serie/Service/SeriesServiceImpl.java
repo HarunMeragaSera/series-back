@@ -3,6 +3,8 @@ package com.harun.series.Serie.Service;
 import com.harun.series.Exceptions.SeriesAlreadyExistsException;
 import com.harun.series.Exceptions.SeriesNotFoundException;
 import com.harun.series.Genre.models.Genre;
+import com.harun.series.Genre.repository.GenreRepository;
+import com.harun.series.Serie.Dto.SeriesCreateDTO;
 import com.harun.series.Serie.Dto.SeriesDto;
 import com.harun.series.Serie.Mapper.SeriesMapper;
 import com.harun.series.Serie.models.Series;
@@ -10,7 +12,9 @@ import com.harun.series.Serie.repositories.SeriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,9 +23,11 @@ public class SeriesServiceImpl implements SeriesService{
 
 
     private final SeriesRepository seriesRepository;
+    private final GenreRepository genreRepository;
     @Autowired
-    public SeriesServiceImpl(SeriesRepository seriesRepository) {
+    public SeriesServiceImpl(SeriesRepository seriesRepository,GenreRepository genreRepository) {
         this.seriesRepository = seriesRepository;
+        this.genreRepository = genreRepository;
     }
 
     @Override
@@ -33,12 +39,18 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public SeriesDto save(SeriesDto seriesDto) throws SeriesAlreadyExistsException {
-        if(existsByName(seriesDto.getName())){
-            throw new SeriesAlreadyExistsException(seriesDto.getName());
+    public SeriesDto save(SeriesCreateDTO dto) throws SeriesAlreadyExistsException {
+        if(existsByName(dto.getName())){
+            throw new SeriesAlreadyExistsException(dto.getName());
+        }
+        Set<Genre> genres = new HashSet<>();
+        if (dto.getGenreIds() != null && !dto.getGenreIds().isEmpty()) {
+            genres.addAll(genreRepository.findAllById(dto.getGenreIds()));
         }
 
-        return SeriesMapper.toDto(seriesRepository.save(SeriesMapper.seriesDtoToSeries(seriesDto)));
+        Series series = SeriesMapper.seriesCreateDto_toEntity(dto, genres);
+
+        return SeriesMapper.toDto(seriesRepository.save(series));
     }
 
     @Override
