@@ -7,11 +7,11 @@ public class GenreMapper {
 
     public static GenreDto toDTO(Genre genre) {
         if (genre == null) return null;
-        return new GenreDto(genre.getName());
+        return new GenreDto(genre.getName(), genre.getName_es());
     }
 
     public static Genre toEntity(GenreDto genreDTO) {
         if (genreDTO == null) return null;
-        return new Genre(genreDTO.getName());
+        return new Genre(genreDTO.getName(), genreDTO.getName_es());
     }
 }

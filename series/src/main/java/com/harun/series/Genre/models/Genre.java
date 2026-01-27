@@ -18,6 +18,9 @@ public class Genre {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private String name_es;
+
     @ManyToMany(mappedBy = "genres")
     @JsonIgnore
     private Set<Series> series = new HashSet<>();
@@ -25,8 +28,10 @@ public class Genre {
     public Genre() {
     }
 
-    public Genre(String name) {
+    public Genre(String name,String name_es) {
+
         this.name = name;
+        this.name_es = name_es;
     }
 
     public Long getId() {
@@ -44,6 +49,15 @@ public class Genre {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getName_es() {
+        return name_es;
+    }
+
+    public void setName_es(String name_es) {
+        this.name_es = name_es;
+    }
+
     public Set<Series> getSeries() { return series; }
     public void setSeries(Set<Series> series) { this.series = series; }
 }
