@@ -46,8 +46,8 @@ public class SeriesController {
         seriesService.deleteById(id);
     }
 
-    @PostMapping("/{id}")
-    public SeriesDto update(@PathVariable("id") Long id,@RequestBody @Validated SeriesDto series){
-        return seriesService.update(id,series);
+    @PostMapping("/{publicId}")
+    public SeriesDto update(@PathVariable("publicId") String publicId,@RequestBody @Validated SeriesCreateDTO series){
+        return seriesService.update(publicId,series);
     }
 }

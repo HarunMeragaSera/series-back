@@ -14,10 +14,13 @@ public class SeriesMapper {
     public static Series seriesDtoToSeries(SeriesDto dto){
         return new Series(dto.getName(),dto.getRating(),dto.getImageUrl(),dto.getYearWatch(),dto.getDescription());
     }
-    public static Series dtoAndSeriesToSeries(SeriesDto dto, Series series){
+    public static Series dtoAndSeriesToSeries(SeriesCreateDTO dto, Series series,Set<Genre> genres){
         series.setName(dto.getName());
         series.setRating(dto.getRating());
         series.setImageUrl(dto.getImageUrl());
+        series.setDescription(dto.getDescription());
+        series.setYearWatch(dto.getYearWatch());
+        series.setGenres(genres);
         return series;
     }
 

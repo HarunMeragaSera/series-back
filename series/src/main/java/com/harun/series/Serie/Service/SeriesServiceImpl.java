@@ -54,12 +54,11 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public SeriesDto update(Long id, SeriesDto seriesDto) {
-        if(existsByName(seriesDto.getName())){
-            throw new SeriesAlreadyExistsException(seriesDto.getName());
-        }
-        Series serieFounded = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
-        return SeriesMapper.toDto(seriesRepository.save(SeriesMapper.dtoAndSeriesToSeries(seriesDto,serieFounded)));
+    public SeriesDto update(String publicId, SeriesCreateDTO dto) {
+        Series serieFounded = seriesRepository.findByPublicId(publicId).orElseThrow(() -> new SeriesNotFoundException(publicId));
+        Set<Genre> genres = new HashSet<>(genreRepository.findAllById(dto.getGenreIds()));
+        Series serie = SeriesMapper.dtoAndSeriesToSeries(dto,serieFounded,genres);
+        return SeriesMapper.toDto(seriesRepository.save(serie));
     }
 
     @Override
