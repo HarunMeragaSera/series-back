@@ -33,7 +33,7 @@ public class SeriesMapper {
             series.getPublicId(),
             series.getDescription(),
             series.getGenres().stream()
-                        .map(Genre::getName)
+                        .map(Genre::getId)
                         .toList()
         );
     }

@@ -20,7 +20,7 @@ public class SeriesDto {
     private Integer yearWatch;
     private String description;
     private String publicId;
-    private List<String> genres;
+    private List<Long> genres;
 
     public SeriesDto(String name, Rating rating, Integer yearWatch) {
         this.name = name;
@@ -29,7 +29,7 @@ public class SeriesDto {
 
     }
 
-    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch,String publicId,String description,List<String> genres) {
+    public SeriesDto(String name, Rating rating,String imageUrl,Integer yearWatch,String publicId,String description,List<Long> genres) {
         this.name = name;
         this.rating = rating;
         this.imageUrl = imageUrl;
@@ -89,11 +89,11 @@ public class SeriesDto {
         this.description = description;
     }
 
-    public List<String> getGenres() {
+    public List<Long> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<String> genres) {
+    public void setGenres(List<Long> genres) {
         this.genres = genres;
     }
 }
