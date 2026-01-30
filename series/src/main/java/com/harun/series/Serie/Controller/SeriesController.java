@@ -4,8 +4,10 @@ import com.harun.series.Exceptions.SeriesAlreadyExistsException;
 import com.harun.series.Exceptions.SeriesNotFoundException;
 import com.harun.series.Serie.Dto.SeriesCreateDTO;
 import com.harun.series.Serie.Dto.SeriesDto;
+import com.harun.series.Serie.Dto.SeriesFilterDTO;
 import com.harun.series.Serie.Service.SeriesService;
 import com.harun.series.Serie.models.Series;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +39,8 @@ public class SeriesController {
     }
 
     @GetMapping()
-    public List<SeriesDto> findAll(){
-        return seriesService.findAll();
+    public List<SeriesDto> findAll(SeriesFilterDTO filter){
+        return seriesService.findAll(filter);
     }
 
     @DeleteMapping("/{id}")

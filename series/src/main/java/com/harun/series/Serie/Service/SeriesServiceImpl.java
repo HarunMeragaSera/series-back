@@ -6,10 +6,13 @@ import com.harun.series.Genre.models.Genre;
 import com.harun.series.Genre.repository.GenreRepository;
 import com.harun.series.Serie.Dto.SeriesCreateDTO;
 import com.harun.series.Serie.Dto.SeriesDto;
+import com.harun.series.Serie.Dto.SeriesFilterDTO;
 import com.harun.series.Serie.Mapper.SeriesMapper;
 import com.harun.series.Serie.models.Series;
 import com.harun.series.Serie.repositories.SeriesRepository;
+import com.harun.series.Serie.specifications.SeriesSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -31,8 +34,27 @@ public class SeriesServiceImpl implements SeriesService{
     }
 
     @Override
-    public List<SeriesDto> findAll() {
-        return seriesRepository.findAll()
+    public List<SeriesDto> findAll(SeriesFilterDTO filter) {
+        Specification<Series> spec = Specification.allOf();
+        if (filter.getRating() != null) {
+            spec = spec.and(SeriesSpecifications.hasRating(filter.getRating()));
+        }
+        if (filter.getYearFrom() != null) {
+            spec = spec.and(
+                    SeriesSpecifications.yearGreaterThanEqual(filter.getYearFrom())
+            );
+        }
+        if (filter.getYearTo() != null) {
+            spec = spec.and(
+                    SeriesSpecifications.yearLessThanEqual(filter.getYearTo())
+            );
+        }
+        if (filter.getGenres() != null && !filter.getGenres().isEmpty()) {
+            spec = spec.and(
+                    SeriesSpecifications.hasGenres(filter.getGenres())
+            );
+        }
+        return seriesRepository.findAll(spec)
                 .stream()
                 .map(SeriesMapper::toDto)
                 .toList();
