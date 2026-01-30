@@ -15,14 +15,9 @@ public class SeriesSpecifications {
                 cb.equal(root.get("rating"), rating);
     }
 
-    public static Specification<Series> yearGreaterThanEqual(Integer year) {
+    public static Specification<Series> yearEqual(Integer year) {
         return (root, query, cb) ->
-                cb.greaterThanOrEqualTo(root.get("yearWatch"), year);
-    }
-
-    public static Specification<Series> yearLessThanEqual(Integer year) {
-        return (root, query, cb) ->
-                cb.lessThanOrEqualTo(root.get("yearWatch"), year);
+                cb.equal(root.get("yearWatch"), year);
     }
 
     public static Specification<Series> hasGenres(List<Long> genreIds) {

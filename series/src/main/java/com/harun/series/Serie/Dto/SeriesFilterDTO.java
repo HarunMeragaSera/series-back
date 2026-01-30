@@ -7,8 +7,7 @@ import java.util.List;
 public class SeriesFilterDTO {
 
     private Rating rating;
-    private Integer yearFrom;
-    private Integer yearTo;
+    private Integer yearWatch;
     private List<Long> genres;
 
     public Rating getRating() {
@@ -19,27 +18,19 @@ public class SeriesFilterDTO {
         this.rating = rating;
     }
 
-    public Integer getYearFrom() {
-        return yearFrom;
-    }
-
-    public void setYearFrom(Integer yearFrom) {
-        this.yearFrom = yearFrom;
-    }
-
-    public Integer getYearTo() {
-        return yearTo;
-    }
-
-    public void setYearTo(Integer yearTo) {
-        this.yearTo = yearTo;
-    }
-
     public List<Long> getGenres() {
         return genres;
     }
 
     public void setGenres(List<Long> genres) {
         this.genres = genres;
+    }
+
+    public Integer getYearWatch() {
+        return yearWatch;
+    }
+
+    public void setYearWatch(Integer yearWatch) {
+        this.yearWatch = yearWatch;
     }
 }

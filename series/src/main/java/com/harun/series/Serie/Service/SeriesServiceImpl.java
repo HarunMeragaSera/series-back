@@ -39,14 +39,9 @@ public class SeriesServiceImpl implements SeriesService{
         if (filter.getRating() != null) {
             spec = spec.and(SeriesSpecifications.hasRating(filter.getRating()));
         }
-        if (filter.getYearFrom() != null) {
+        if (filter.getYearWatch() != null) {
             spec = spec.and(
-                    SeriesSpecifications.yearGreaterThanEqual(filter.getYearFrom())
-            );
-        }
-        if (filter.getYearTo() != null) {
-            spec = spec.and(
-                    SeriesSpecifications.yearLessThanEqual(filter.getYearTo())
+                    SeriesSpecifications.yearEqual(filter.getYearWatch())
             );
         }
         if (filter.getGenres() != null && !filter.getGenres().isEmpty()) {
