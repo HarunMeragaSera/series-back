@@ -27,4 +27,12 @@ public class SeriesSpecifications {
             return genres.get("id").in(genreIds);
         };
     }
+
+    public static Specification<Series> likeName(String name) {
+        return (root, query, cb) ->
+                cb.like(
+                        cb.lower(root.get("name")),
+                        "%" + name.toLowerCase().trim() + "%"
+                );
+    }
 }

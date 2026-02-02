@@ -49,6 +49,11 @@ public class SeriesServiceImpl implements SeriesService{
                     SeriesSpecifications.hasGenres(filter.getGenres())
             );
         }
+        if (filter.getName() != null && !filter.getName().isBlank()) {
+            spec = spec.and(
+                    SeriesSpecifications.likeName(filter.getName())
+            );
+        }
         return seriesRepository.findAll(spec)
                 .stream()
                 .map(SeriesMapper::toDto)

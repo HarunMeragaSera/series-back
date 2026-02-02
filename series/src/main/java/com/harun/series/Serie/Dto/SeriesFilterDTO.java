@@ -9,6 +9,7 @@ public class SeriesFilterDTO {
     private Rating rating;
     private Integer yearWatch;
     private List<Long> genres;
+    private String name;
 
     public Rating getRating() {
         return rating;
@@ -33,4 +34,13 @@ public class SeriesFilterDTO {
     public void setYearWatch(Integer yearWatch) {
         this.yearWatch = yearWatch;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

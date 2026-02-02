@@ -38,10 +38,10 @@ public class SeriesController {
         return seriesService.getByPublicId(publicId);
     }
 
-    @GetMapping()
-    public List<SeriesDto> findAll(SeriesFilterDTO filter){
-        return seriesService.findAll(filter);
-    }
+        @GetMapping()
+        public List<SeriesDto> findAll(SeriesFilterDTO filter){
+            return seriesService.findAll(filter);
+        }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") Long id){
