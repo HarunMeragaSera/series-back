@@ -11,6 +11,7 @@ import com.harun.series.Serie.Mapper.SeriesMapper;
 import com.harun.series.Serie.models.Series;
 import com.harun.series.Serie.repositories.SeriesRepository;
 import com.harun.series.Serie.specifications.SeriesSpecifications;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -83,10 +84,11 @@ public class SeriesServiceImpl implements SeriesService{
         return SeriesMapper.toDto(seriesRepository.save(serie));
     }
 
+    @Transactional
     @Override
-    public void deleteById(Long id) {
-        Series serieFounded = seriesRepository.findById(id).orElseThrow(() -> new SeriesNotFoundException(id));
-        seriesRepository.deleteById(id);
+    public void deleteByPublicId(String publicId) {
+        Series serieFounded = seriesRepository.findByPublicId(publicId).orElseThrow(() -> new SeriesNotFoundException(publicId));
+        seriesRepository.deleteByPublicId(publicId);
 
     }
     @Override

@@ -43,9 +43,9 @@ public class SeriesController {
             return seriesService.findAll(filter);
         }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id){
-        seriesService.deleteById(id);
+    @DeleteMapping("/{publicId}")
+    public void deleteById(@PathVariable("publicId") String publicId){
+        seriesService.deleteByPublicId(publicId);
     }
 
     @PostMapping("/{publicId}")

@@ -13,5 +13,5 @@ public interface SeriesService{
     SeriesDto save(SeriesCreateDTO series);
     SeriesDto update(String publicId, SeriesCreateDTO dto);
     SeriesDto getByPublicId(String publicId);
-    void deleteById(Long id);
+    void deleteByPublicId(String publicId);
 }
